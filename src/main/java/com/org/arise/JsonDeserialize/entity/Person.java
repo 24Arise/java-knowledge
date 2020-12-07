@@ -28,10 +28,8 @@ public class Person {
 	@GeneratedValue
 	private Long id;
 	private String name;
-
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date birthday;
-
 	@JsonDeserialize(using = OptimizedBooleanDeserializer.class)
 	private Boolean enabled;
 

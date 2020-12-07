@@ -2,21 +2,30 @@
 
 - 背景
 
-> 使用 ` ObjectMapper ` 在 `Json` 反序列化时，对象属性类型为 `Boolean` 传入的值为 `"1"` 字符串，`ObjectMapper`反序列化会报错
->
+> 使用 ` ObjectMapper ` 在 `Json` 反序列化时，对象属性类型为 `Boolean`，入参 `"1"` 字符串，`ObjectMapper`反序列化会报错
+
 
 - 处理方式
 
 > 本文介绍通过 `OptimizedBooleanDeserializer` 类，解决入参 为 字符串 `"1"` 时重新返回 `true` 或者 `false` 达到正确反序列化
 
-- 参考代码
+
+- 示例代码
+
+```json5
+{"id": 1024, "name": "四大凶兽 穷奇，饕餮、梼杌、混沌", "birthday": "2020-12-06 21:00", "enabled": "1"}
+```
 
 ```java
-public class PersonDeserialize {
-    public long id = 0;
-    public String name = null;
+public class Person {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date birthday;
     @JsonDeserialize(using = OptimizedBooleanDeserializer.class)
-    public boolean enabled = false;
+    private Boolean enabled;
 }
 ``` 
 
