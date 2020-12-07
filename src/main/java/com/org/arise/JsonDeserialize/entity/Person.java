@@ -1,9 +1,8 @@
 package com.org.arise.JsonDeserialize.entity;
 
-import java.util.Date;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.org.arise.JsonDeserialize.service.OptimizedBooleanDeserializer;
@@ -25,15 +24,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Setter
 public class Person {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-    private String name;
+	@Id
+	@GeneratedValue
+	private Long id;
+	private String name;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date birthday;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date birthday;
 
-    @JsonDeserialize(using = OptimizedBooleanDeserializer.class)
-    private Boolean enabled;
+	@JsonDeserialize(using = OptimizedBooleanDeserializer.class)
+	private Boolean enabled;
 
 }
