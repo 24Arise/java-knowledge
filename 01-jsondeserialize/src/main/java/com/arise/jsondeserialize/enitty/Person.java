@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.org.arise.JsonDeserialize.service.OptimizedBooleanDeserializer;
+import com.arise.jsondeserialize.service.impl.OptimizedBooleanDeserializer;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 

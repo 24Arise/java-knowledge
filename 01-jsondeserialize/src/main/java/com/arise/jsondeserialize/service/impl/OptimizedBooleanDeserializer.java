@@ -1,4 +1,4 @@
-package com.arise.jsondeserialize.service;
+package com.arise.jsondeserialize.service.impl;
 
 import java.io.IOException;
 
@@ -11,11 +11,9 @@ import org.springframework.stereotype.Service;
  * <p>
  * Boolean Deserializer Class
  * </p>
- * >
  *
  * @author 24Arise 2020/12/06 19:07
  */
-
 @Service
 public class OptimizedBooleanDeserializer extends JsonDeserializer<Boolean> {
 
@@ -23,10 +21,7 @@ public class OptimizedBooleanDeserializer extends JsonDeserializer<Boolean> {
 	public Boolean deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
 			throws IOException {
 		String text = jsonParser.getText();
-		if ("0".equals(text) || "false".equals(text)) {
-			return false;
-		}
-		return true;
+		return !"0".equals(text) && !"false".equals(text);
 	}
 
 }
