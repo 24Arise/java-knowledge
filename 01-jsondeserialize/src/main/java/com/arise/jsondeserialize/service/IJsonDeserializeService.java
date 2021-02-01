@@ -11,15 +11,15 @@ import com.arise.jsondeserialize.enitty.Person;
  */
 public interface IJsonDeserializeService {
 
-	/**
-	 * <p>
-	 * Json 转 Object
-	 * </p>
-	 *
-	 * @param jsonContext JSON字符串
-	 * @return com.arise.jsondeserialize.enitty.Person
-	 * @author Tagin 2021-02-01 18:10
-	 */
-	Person json2Object(String jsonContext);
+    /**
+     * <p>
+     * Json 转 Object
+     * </p>
+     *
+     * @param jsonContext JSON字符串
+     * @return com.arise.jsondeserialize.enitty.Person
+     * @author Tagin 2021-02-01 18:10
+     */
+    Person json2Object(String jsonContext);
 
 }

@@ -10,8 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 public class JsondeserializeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(JsondeserializeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(JsondeserializeApplication.class, args);
+    }
 
 }

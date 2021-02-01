@@ -4,7 +4,6 @@ import com.arise.jsondeserialize.enitty.Person;
 import com.arise.jsondeserialize.service.IJsonDeserializeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,18 +16,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class JsonDeserializeServiceImpl implements IJsonDeserializeService {
 
-	@Autowired
-	private ObjectMapper objectMapper;
+    //    @Autowired(required = false)
+    //    private ObjectMapper objectMapper;
 
-	@Override
-	public Person json2Object(String jsonContext) {
-		Person person = new Person();
-		try {
-			person = objectMapper.readValue(jsonContext, Person.class);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return person;
-	}
+    @Override
+    public Person json2Object(String jsonContext) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Person person = new Person();
+        try {
+            person = objectMapper.readValue(jsonContext, Person.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return person;
+    }
 
 }

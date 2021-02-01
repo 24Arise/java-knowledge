@@ -21,27 +21,31 @@
 
 ```java
 public class Person {
-	@Id
-	@GeneratedValue
-	private Long id;
-	private String name;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date birthday;
-	@JsonDeserialize(using = OptimizedBooleanDeserializer.class)
-	private Boolean enabled;
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date birthday;
+    @JsonDeserialize(using = OptimizedBooleanDeserializer.class)
+    private Boolean enabled;
 }
 ``` 
 
 ```java
 public class OptimizedBooleanDeserializer extends JsonDeserializer<Boolean> {
-	@Override
-	public Boolean deserialize(JsonParser jsonParser,
-							   DeserializationContext deserializationContext) throws IOException {
-		String text = jsonParser.getText();
-		return !"0".equals(text) && !"false".equals(text);
-	}
+    @Override
+    public Boolean deserialize(JsonParser jsonParser,
+                               DeserializationContext deserializationContext) throws IOException {
+        String text = jsonParser.getText();
+        return !"0".equals(text) && !"false".equals(text);
+    }
 }
 ```
+
+- 问题
+
+> 目前 工程 中 `ObjectMapper` 类 注入不进来，还未找到原因，因此使用 `ObjectMapper objectMapper = new ObjectMapper()` 方式
 
 - 参考文献
 
