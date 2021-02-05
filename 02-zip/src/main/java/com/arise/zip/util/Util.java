@@ -1,5 +1,7 @@
 package com.arise.zip.util;
 
+import java.io.File;
+
 /**
  * <p>
  * 工具类
@@ -14,6 +16,7 @@ public class Util {
 	// "/" 用来作为 目录 判断的表示
 
 	public static final String PATH = "/";
+	public static final String SEPARATOR = File.separator;
 	public static final int BUFFER = 2048;
 
 }
