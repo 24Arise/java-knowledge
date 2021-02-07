@@ -7,7 +7,7 @@ import java.io.File;
  * Java原生 zip 压缩接口类
  * </p>
  *
- * @author 24arise 2021/02/04 18:08
+ * @author 24Arise 2021/02/04 18:08
  */
 public interface ICompressService {
 
