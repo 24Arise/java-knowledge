@@ -143,6 +143,8 @@ public class DecompressServiceImpl implements IDecompressService {
 			while ((count = zis.read(data, 0, Util.BUFFER)) != -1) {
 				bos.write(data, 0, count);
 			}
+			bos.flush();
+			bos.close();
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 		}
