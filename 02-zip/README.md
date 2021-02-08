@@ -61,36 +61,36 @@ Error|描述|
 ```java
 // 输出文件 CRC32 校验
 CheckedOutputStream cos=new CheckedOutputStream(new FileOutputStream(destFile),new CRC32());
-		ZipOutputStream zos=new ZipOutputStream(cos);
+ZipOutputStream zos=new ZipOutputStream(cos);
 ```
 
 > `ZipEntry` 追加文件条目
 
 ```java
 ZipEntry entry=new ZipEntry(dir+file.getName());
-		zos.putNextEntry(entry);
+zos.putNextEntry(entry);
 ```
 
 > 压缩文件
 
 ```java
 private void compressFile(File file,ZipOutputStream zos,String dir){
-		try{
+	try{
 		ZipEntry entry=new ZipEntry(dir+file.getName());
 		zos.putNextEntry(entry);
 		BufferedInputStream bis=new BufferedInputStream(new FileInputStream(file));
-
+	
 		int count;
 		byte[]data=new byte[Util.BUFFER];
 		while((count=bis.read(data,0,Util.BUFFER))!=-1){
-		zos.write(data,0,count);
+			zos.write(data,0,count);
 		}
 		bis.close();
 		zos.closeEntry();
-		}catch(IOException e){
+	}catch(IOException e){
 		LOGGER.error(e.getMessage(),e);
-		}
-		}
+	}
+}
 ```
 
 - 解压缩
@@ -105,66 +105,66 @@ private void compressFile(File file,ZipOutputStream zos,String dir){
 ```java
 // 输入文件 CRC32 校验
 CheckedInputStream cis=new CheckedInputStream(new FileInputStream(srcFile),new CRC32());
-		ZipInputStream zis=new ZipInputStream(cis);
+ZipInputStream zis=new ZipInputStream(cis);
 ```
 
 > 创建父目录
 
 ```java
 private void fileProber(File dirFile){
-		File parentFile=dirFile.getParentFile();
-		if(!parentFile.exists()){
+	File parentFile=dirFile.getParentFile();
+	if(!parentFile.exists()){
 		// 递归寻找上级目录
 		fileProber(parentFile);
 		parentFile.mkdir();
-		}
-		}
+	}
+}
 ```
 
 > `ZipEntry` 提取压缩项
 
 ```java
 private void decompress(File destFile,ZipInputStream zis){
-		try{
+	try{
 		ZipEntry entry=null;
 		while((entry=zis.getNextEntry())!=null){
-		// 文件
-		String dir=destFile.getPath()+Util.SEPARATOR+entry.getName();
-		File dirFile=new File(dir);
-
-		// 文件检查
-		fileProber(dirFile);
-		if(entry.isDirectory()){
-		dirFile.mkdir();
-		}else{
-		decompressFile(dirFile,zis);
+			// 文件
+			String dir=destFile.getPath()+Util.SEPARATOR+entry.getName();
+			File dirFile=new File(dir);
+			
+			// 文件检查
+			fileProber(dirFile);
+			if(entry.isDirectory()){
+			dirFile.mkdir();
+			}else{
+			decompressFile(dirFile,zis);
+			}
+			zis.closeEntry();
 		}
-		zis.closeEntry();
-		}
-		}catch(Exception e){
+	}catch(Exception e){
 		LOGGER.error(e.getMessage(),e);
-		}
-		}
+	}
+}
 ```
 
 > 解压缩文件
 
 ```java
 private void decompressFile(File destFile,ZipInputStream zis){
-		try{
+	try{
 		BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(destFile));
-
+	
 		int count;
 		byte[]data=new byte[Util.BUFFER];
 		while((count=zis.read(data,0,Util.BUFFER))!=-1){
-		bos.write(data,0,count);
+			bos.write(data,0,count);
 		}
 		bos.flush();
 		bos.close();
-		}catch(Exception e){
+	}catch(Exception e){
 		LOGGER.error(e.getMessage(),e);
-		}
-		}
+	}
+}
 ```
 
 - 参考文献
